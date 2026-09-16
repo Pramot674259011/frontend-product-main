@@ -134,40 +134,40 @@ function App() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#FAF6EE] px-4 py-6 sm:px-6 lg:px-8">
+      <main className="min-h-screen px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <header className="rounded-3xl border-2 border-[#E8DFC8] bg-[#F3ECDA] px-5 py-7 text-[#3A3226] shadow-lg sm:px-8">
+          <header className="hero-panel rounded-box px-5 py-7 text-primary-content shadow-xl sm:px-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end">
               <div>
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="grid size-12 place-items-center rounded-2xl border-2 border-[#E8DFC8] bg-white">
-                    <Package className="size-7 text-[#3A3226]" />
+                  <div className="grid size-12 place-items-center rounded-2xl">
+                    <Package className="size-7" />
                   </div>
-                  <span className="badge badge-outline rounded-full border-[#C9BB93] text-[#6B5F45]">
+                  <span className="badge badge-outline border-white/40 text-white">
                     Product
                   </span>
                 </div>
                 <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
                   Product Management
                 </h1>
-                <p className="mt-2 max-w-xl text-sm text-[#6B5F45] sm:text-base">
+                <p className="mt-2 max-w-xl text-sm text-primary-content/75 sm:text-base">
                   จัดการสินค้าและราคาได้อย่างรวดเร็วในที่เดียว
                 </p>
               </div>
             </div>
           </header>
 
-          <section className="card mt-6 rounded-3xl border-2 border-[#E8DFC8] bg-white shadow-lg">
+          <section className="card border border-base-300 bg-base-100 shadow-sm">
             <div className="card-body p-5 sm:p-6">
               <div className="mb-2 flex items-center gap-3">
-                <div className="rounded-2xl border border-[#E8DFC8] bg-[#F3ECDA] p-2 text-[#6B5F45]">
+                <div className="rounded-xl bg-primary/10 p-2 text-primary">
                   <CirclePlus className="size-5" />
                 </div>
                 <div>
-                  <h2 className="card-title text-xl text-[#3A3226]">
+                  <h2 className="card-title text-xl">
                     {editingId ? "แก้ไขสินค้า" : "เพิ่มสินค้าใหม่"}
                   </h2>
-                  <p className="text-sm text-[#8A7E64]">
+                  <p className="text-sm text-base-content/60">
                     กรอกข้อมูลเพื่อ
                     {editingId ? "แก้ไขรายการ" : "เพิ่มรายการเข้าสู่ระบบ"}
                   </p>
@@ -179,31 +179,31 @@ function App() {
                 onSubmit={editingId ? handleUpdateProduct : handleCreateProduct}
               >
                 <label className="form-control w-full">
-                  <span className="label-text mb-2 font-medium text-[#3A3226]">
+                  <span className="label-text mb-2 font-medium">
                     ชื่อสินค้า
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full rounded-2xl border-[#E8DFC8] bg-[#FAF6EE] focus:border-[#C9BB93] focus:outline-none"
+                    className="input input-bordered w-full"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="ชื่อสินค้า เช่น กล้องวิทยุโทรศัพท์มือถือไร้สาย"
                   />
                 </label>
                 <label className="form-control w-full">
-                  <span className="label-text mb-2 font-medium text-[#3A3226]">
+                  <span className="label-text mb-2 font-medium">
                     ราคา (บาท)
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full rounded-2xl border-[#E8DFC8] bg-[#FAF6EE] focus:border-[#C9BB93] focus:outline-none"
+                    className="input input-bordered w-full"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     placeholder="ราคา เช่น 1599"
                   />
                 </label>
                 <button
-                  className="btn w-full rounded-2xl border-2 border-[#3A3226] bg-[#3A3226] text-white hover:bg-[#2A2419] md:w-auto"
+                  className="btn btn-primary w-full md:w-auto"
                   type="submit"
                   disabled={isSubmiting}
                 >
@@ -222,7 +222,7 @@ function App() {
                 </button>
                 {editingId && (
                   <button
-                    className="btn btn-ghost w-full rounded-2xl border-2 border-[#E8DFC8] text-[#6B5F45] md:w-auto"
+                    className="btn btn-ghost w-full md:w-auto"
                     type="button"
                     onClick={cancelEditing}
                     disabled={isSubmiting}
@@ -235,47 +235,43 @@ function App() {
           </section>
 
           {error && (
-            <div className="alert mt-6 rounded-2xl border-2 border-[#E8B4B4] bg-[#FBEAEA] text-[#8A3A3A] shadow-lg">
+            <div className="alert alert-error shadow-sm">
               <span>เกิดข้อผิดพลาด: {error}</span>
             </div>
           )}
 
           {loading ? (
-            <div className="mt-6 flex min-h-48 items-center justify-center rounded-3xl border-2 border-[#E8DFC8] bg-white shadow-lg">
-              <span className="loading loading-spinner loading-xl text-[#6B5F45]" />
+            <div className="flex min-h-48 items-center justify-center rounded-box border border-base-300 bg-base-100 shadow-sm">
+              <span className="loading loading-spinner loading-xl" />
               <span className="sr-only">กำลังโหลดข้อมูล...</span>
             </div>
           ) : products.length === 0 ? (
-            <div className="card mt-6 rounded-3xl border-2 border-dashed border-[#E8DFC8] bg-white shadow-lg">
+            <div className="card border border-dashed border-base-300 bg-base-100 shadow-sm">
               <div className="card-body items-center py-14 text-center">
-                <Package className="size-12 text-[#C9BB93]" />
-                <h2 className="card-title mt-2 text-[#3A3226]">
-                  ยังไม่มีข้อมูลสินค้า
-                </h2>
-                <p className="text-sm text-[#8A7E64]">
+                <Package className="size-12 text-base-content/25" />
+                <h2 className="card-title mt-2">ยังไม่มีข้อมูลสินค้า</h2>
+                <p className="text-sm text-base-content/60">
                   เริ่มต้นด้วยการเพิ่มสินค้าใหม่ด้านบน
                 </p>
               </div>
             </div>
           ) : (
-            <section className="card mt-6 rounded-3xl border-2 border-[#E8DFC8] bg-white shadow-lg overflow-hidden">
+            <section className="card border border-base-300 bg-base-100 shadow-sm">
               <div className="card-body p-0">
                 <div className="flex items-center justify-between px-5 py-5 sm:px-6">
                   <div>
-                    <h2 className="card-title text-[#3A3226]">
-                      รายการสินค้าทั้งหมด
-                    </h2>
-                    <p className="text-sm text-[#8A7E64]">
+                    <h2 className="card-title">รายการสินค้าทั้งหมด</h2>
+                    <p className="text-sm text-base-content/60">
                       มีสินค้า {products.length} รายการ
                     </p>
                   </div>
-                  <span className="badge badge-lg rounded-full border-2 border-[#3A3226] bg-[#3A3226] text-white">
+                  <span className="badge badge-primary badge-lg">
                     {products.length}
                   </span>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="table table-zebra">
-                    <thead className="bg-[#F3ECDA] text-[#3A3226]">
+                    <thead>
                       <tr>
                         <th>รหัสสินค้า</th>
                         <th>ชื่อ</th>
@@ -285,26 +281,24 @@ function App() {
                     </thead>
                     <tbody>
                       {products.map((item) => (
-                        <tr key={item.id} className="hover:bg-[#FAF6EE]">
-                          <td className="font-mono text-xs text-[#8A7E64]">
+                        <tr key={item.id}>
+                          <td className="font-mono text-xs text-base-content/50">
                             #{item.id}
                           </td>
-                          <td className="font-medium text-[#3A3226]">
-                            {item.name}
-                          </td>
-                          <td className="font-bold text-[#3A3226]">
+                          <td className="font-medium">{item.name}</td>
+                          <td className="font-bold text-success">
                             {Number(item.price).toLocaleString()}฿
                           </td>
                           <td className="text-right">
                             <button
-                              className="btn btn-square btn-ghost btn-sm rounded-xl text-[#6B5F45] hover:bg-[#F3ECDA]"
+                              className="btn btn-square btn-ghost btn-sm text-primary hover:bg-primary/10"
                               onClick={() => startEditing(item)}
                               aria-label={`แก้ไขข้อมูลสินค้า${item.name}`}
                             >
                               <SquarePen className="size-4" />
                             </button>
                             <button
-                              className="btn btn-square btn-ghost btn-sm rounded-xl text-[#B04A4A] hover:bg-[#FBEAEA]"
+                              className="btn btn-square btn-ghost btn-sm text-error hover:bg-primary/10"
                               onClick={() => deleteProduct(item.id)}
                               aria-label={`ลบสินค้า${item.name}`}
                             >
